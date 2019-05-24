@@ -23,7 +23,7 @@ public class GamePanel {
 		JFrame frame = new JFrame("Escape Room");
 		JPanel mainPanel = new JPanel(new GridLayout(3,2));	//mainPanel
 		
-		JPanel livesTimePanel = new JPanel(new GridLayout(2,1));	//1st Panel
+		JPanel livesTimeScorePanel = new JPanel(new GridLayout(2,1));	//1st Panel
 		JPanel roomQuestionPanel = new JPanel(new GridLayout(2,1));	//2nd Panel
 		
 		JPanel playerPanel = new JPanel();	//3rd Panel
@@ -34,9 +34,11 @@ public class GamePanel {
 		JPanel answersDoorsRBtnPanel = new JPanel(new GridLayout(3,3));	//6th Panel
 		
 		JLabel livesLabel = new JLabel("Lives: " + Player.getLives());	//Fill 1st Panel
-		JLabel timerLabel = new JLabel("Time Left: " /*+ timeLeft*/);
-		livesTimePanel.add(livesLabel);
-		livesTimePanel.add(timerLabel);
+		JLabel timerLabel = new JLabel("Time Left: " /*+ Player.getTimeLeft()*/);
+		JLabel scoreLabel = new JLabel("Score: " + Player.getScore());
+		livesTimeScorePanel.add(livesLabel);
+		livesTimeScorePanel.add(timerLabel);
+		livesTimeScorePanel.add(scoreLabel);
 		
 		JLabel roomPanel = new JLabel("Room " + Player.getCurrentRoom());	//Fill 2nd Panel
 		JLabel questionLabel = new JLabel(Story.getQuestion());	
@@ -61,8 +63,8 @@ public class GamePanel {
 		
 		JButton skipBtn = new JButton("Skip question");	//Fill 5th Panel
 		skipBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	//Implementation missing!
-				
+			public void actionPerformed(ActionEvent e) {
+					GameFunctions.skipBtn(frame);
 			}
 		});
 		JButton restartBtn = new JButton("      Restart      ");
@@ -77,7 +79,7 @@ public class GamePanel {
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-				if (response==0)
+				if (response == 0)
 					System.exit(0);
 			}	
 		});
@@ -114,28 +116,28 @@ public class GamePanel {
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
-					if (answer1Label.getText().equals(Story.get_right_answer())) {	//correct answer
-						GameFunctions.Right_Answer(frame);
+					if (answer1Label.getText().equals(Story.getRightAnswer())) {	//correct answer
+						GameFunctions.rightAnswer(frame);
 					}
 					else {	//wrong answer
-						GameFunctions.Wrong_Answer(frame);
+						GameFunctions.wrongAnswer(frame);
 					}
 				}
 				else if (door2RBtn.isSelected()) {	//2nd Btn selected
-					if (answer2Label.getText().equals(Story.get_right_answer())) {
-						GameFunctions.Right_Answer(frame);
+					if (answer2Label.getText().equals(Story.getRightAnswer())) {
+						GameFunctions.rightAnswer(frame);
 					}
 					else {
-						GameFunctions.Wrong_Answer(frame);
+						GameFunctions.wrongAnswer(frame);
 							
 					}
 				}
 				else if (door3RBtn.isSelected()) {	//3rd Btn selected
-					if (answer3Label.getText().equals(Story.get_right_answer())) {
-						GameFunctions.Right_Answer(frame);
+					if (answer3Label.getText().equals(Story.getRightAnswer())) {
+						GameFunctions.rightAnswer(frame);
 					}
 					else {
-						GameFunctions.Wrong_Answer(frame);
+						GameFunctions.wrongAnswer(frame);
 					}		
 				}
 				else {
@@ -153,14 +155,14 @@ public class GamePanel {
 		answersDoorsRBtnPanel.add(emptyLabel);
 		answersDoorsRBtnPanel.add(confirmBtn);
 		
-		mainPanel.add(livesTimePanel);	//Fill mainPanel
+		mainPanel.add(livesTimeScorePanel);	//Fill mainPanel
 		mainPanel.add(roomQuestionPanel);
 		mainPanel.add(playerPanel);
 		mainPanel.add(doorsImagePanel);
 		mainPanel.add(restartSkipExitPanel);
 		mainPanel.add(answersDoorsRBtnPanel);
 		
-		livesTimePanel.setBackground(Color.LIGHT_GRAY);	//BackgroundColors
+		livesTimeScorePanel.setBackground(Color.LIGHT_GRAY);	//BackgroundColors
 		roomQuestionPanel.setBackground(Color.LIGHT_GRAY);
 		playerPanel.setBackground(Color.LIGHT_GRAY);
 		doorsImagePanel.setBackground(Color.LIGHT_GRAY);

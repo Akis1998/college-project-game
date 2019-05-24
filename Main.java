@@ -8,7 +8,6 @@ public class Main {
 	}
 	
 	public static void openNewGamePanel() {
-		
 		Story.findQuestion(Player.getCurrentRoom());
 		new GamePanel();
 	}
