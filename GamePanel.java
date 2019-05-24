@@ -1,14 +1,25 @@
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.awt.*;
-import javax.swing.*;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class GamePanel {
 	
-	public GamePanel(int livesLeft,/* xxx timeLeft,*/ int questionPos, int answer1Pos, int answer2Pos, int answer3Pos) {
+	public GamePanel() {
 		JFrame frame = new JFrame("Escape Room");
 		JPanel mainPanel = new JPanel(new GridLayout(3,2));	//mainPanel
 		
@@ -27,8 +38,8 @@ public class GamePanel {
 		livesTimePanel.add(livesLabel);
 		livesTimePanel.add(timerLabel);
 		
-		JLabel roomPanel = new JLabel("Room " + Player.getCurrentRoom());	//Fill 2nd Panel
-		JLabel questionLabel = new JLabel(Story.getQuestion(questionPos));	
+		JLabel roomPanel = new JLabel("Room " + Player.getCurrentLevel());	//Fill 2nd Panel
+		JLabel questionLabel = new JLabel(Story.getQuestion());	
 		roomQuestionPanel.add(roomPanel);
 		roomQuestionPanel.add(questionLabel);
 		
@@ -57,13 +68,17 @@ public class GamePanel {
 		JButton restartBtn = new JButton("      Restart      ");
 		restartBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.confirmRestart();
+				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Restart?", "Restart", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (response == JOptionPane.YES_NO_OPTION)
+					System.exit(0);	//Later this should restart the application!
 			}
 		});
 		JButton exitBtn = new JButton("         Exit         ");
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.confirmExit();
+				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (response==0)
+					System.exit(0);
 			}	
 		});
 		restartSkipExitPanel.add(Box.createVerticalGlue());
@@ -74,14 +89,13 @@ public class GamePanel {
 		restartSkipExitPanel.add(exitBtn);
 		restartSkipExitPanel.add(Box.createVerticalGlue());
 		
-		ArrayList<Integer> shuffledAnswers = new ArrayList<>();	//Fill 6th Panel
-		shuffledAnswers.add(answer1Pos);
-		shuffledAnswers.add(answer2Pos);
-		shuffledAnswers.add(answer3Pos);
+		ArrayList<String> shuffledAnswers = new ArrayList<>();	//Fill 6th Panel
+		for (String an_answer: Story.getAnswers())
+			shuffledAnswers.add(an_answer);
 		Collections.shuffle(shuffledAnswers);	//shuffle the answers
-		JLabel answer1Label = new JLabel(Story.getAnswer(shuffledAnswers.get(0)));
-		JLabel answer2Label = new JLabel(Story.getAnswer(shuffledAnswers.get(1)));
-		JLabel answer3Label = new JLabel(Story.getAnswer(shuffledAnswers.get(2)));
+		JLabel answer1Label = new JLabel(shuffledAnswers.get(0));
+		JLabel answer2Label = new JLabel(shuffledAnswers.get(1));
+		JLabel answer3Label = new JLabel(shuffledAnswers.get(2));
 		
 		JRadioButton door1RBtn = new JRadioButton("Door 1");
 		JRadioButton door2RBtn = new JRadioButton("Door 2");
@@ -99,7 +113,7 @@ public class GamePanel {
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
-					if (answer1Label.getText().equals(Story.getAnswer(answer3Pos))) {	//wrong answer - Needs Implementation!
+					if (answer1Label.getText().equals(Story.get_right_answer())) {	//wrong answer - Needs Implementation!
 					}
 					else {	//correct answer
 						frame.dispose();
@@ -107,7 +121,7 @@ public class GamePanel {
 					}
 				}
 				else if (door2RBtn.isSelected()) {	//2nd Btn selected
-					if (answer2Label.getText().equals(Story.getAnswer(answer3Pos))) {	//wrong answer - Needs Implementation!
+					if (answer2Label.getText().equals(Story.get_right_answer())) {	//wrong answer - Needs Implementation!
 					}
 					else {	//correct answer
 						frame.dispose();
@@ -115,7 +129,7 @@ public class GamePanel {
 					}
 				}
 				else if (door3RBtn.isSelected()) {	//3rd Btn selected
-					if (answer3Label.getText().equals(Story.getAnswer(answer3Pos))) {	//wrong answer - Needs Implementation!
+					if (answer3Label.getText().equals(Story.get_right_answer())) {	//wrong answer - Needs Implementation!
 					}
 					else {
 						frame.dispose();
