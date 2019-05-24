@@ -110,30 +110,32 @@ public class GamePanel {
 		
 		JLabel emptyLabel = new JLabel();
 		JButton confirmBtn = new JButton("Confirm");
+		
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
-					if (answer1Label.getText().equals(Story.get_right_answer())) {	//wrong answer - Needs Implementation!
+					if (answer1Label.getText().equals(Story.get_right_answer())) {	//correct answer
+						GameFunctions.Right_Answer(frame);
 					}
-					else {	//correct answer
-						frame.dispose();
-						Main.openNewGamePanel();	
+					else {	//wrong answer
+						GameFunctions.Wrong_Answer(frame);
 					}
 				}
 				else if (door2RBtn.isSelected()) {	//2nd Btn selected
-					if (answer2Label.getText().equals(Story.get_right_answer())) {	//wrong answer - Needs Implementation!
+					if (answer2Label.getText().equals(Story.get_right_answer())) {
+						GameFunctions.Right_Answer(frame);
 					}
-					else {	//correct answer
-						frame.dispose();
-						Main.openNewGamePanel();
+					else {
+						GameFunctions.Wrong_Answer(frame);
+							
 					}
 				}
 				else if (door3RBtn.isSelected()) {	//3rd Btn selected
-					if (answer3Label.getText().equals(Story.get_right_answer())) {	//wrong answer - Needs Implementation!
+					if (answer3Label.getText().equals(Story.get_right_answer())) {
+						GameFunctions.Right_Answer(frame);
 					}
 					else {
-						frame.dispose();
-						Main.openNewGamePanel();
+						GameFunctions.Wrong_Answer(frame);
 					}		
 				}
 				else {
