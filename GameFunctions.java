@@ -7,22 +7,22 @@ public class GameFunctions {
 	public static void Right_Answer(JFrame aframe) {
 		
 		Player.addALife();
-		Message_Box.show_message("Good job! On to the next round!");
+		Player.updateCurrentRoom();
+		Message_Box.show_message("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe);
 		aframe.dispose();
 		Main.openNewGamePanel();
 		
 	}
 	
 	public static void Wrong_Answer(JFrame aframe) {
-		
-		System.out.println("GF WRONG!");
 		Player.removeALife();
-		Message_Box.show_message("Wrong answer! Lives left: "+Player.getLives());
+		
 		if (Player.getLives()==0) {
-			Message_Box.show_message("GAME OVER!");
+			Message_Box.show_message("GAME OVER!!!",aframe);
 			System.exit(1);
 		}
-		
+		Player.updateCurrentRoom();
+		Message_Box.show_message("Wrong answer!\nLives left: "+Player.getLives(),aframe);
 		aframe.dispose();
 		Main.openNewGamePanel();
 		

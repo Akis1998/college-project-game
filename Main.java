@@ -1,18 +1,15 @@
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import javax.swing.JOptionPane;
-
-public class Main {	//Dummy Main(Game?) Class
+public class Main {
 
 	public static void main(String[] args) {
 		openNewGamePanel();
 	}
 	
 	public static void openNewGamePanel() {
-//		Player.updateCurrentRoom();
-//		Story.updateNextQuestion();
-//		ArrayList<Integer> nextQuestion = Story.getNextQuestion();
-		Story.findQuestion(Player.getCurrentLevel());
+		
+		Story.findQuestion(Player.getCurrentRoom());
 		new GamePanel();
 	}
 }

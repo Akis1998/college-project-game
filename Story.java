@@ -16,10 +16,6 @@ public class Story {	//Dummy Story Class
 	private static ArrayList<String> answers;
 	private static final int NUMBEROFQUESTIONS = 1;
 	
-	private Story() {
-		
-	}
-	
 	public static void get_level_Questions(int level) {
 		JSONParser parser = new JSONParser();
 		try {     
@@ -47,7 +43,7 @@ public class Story {	//Dummy Story Class
 		Random randomGenerator = new Random();
 		int random_int= randomGenerator.nextInt(NUMBEROFQUESTIONS);
 		get_level_Questions(level);
-		System.out.println(level_question_set.get(random_int));
+		System.out.println(level_question_set);
 		HashMap<String, ArrayList<String>> question_and_ans_struct = (HashMap) level_question_set.get(random_int);
 		
 		question = (String) question_and_ans_struct.keySet().toArray()[0];

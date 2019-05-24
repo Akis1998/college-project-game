@@ -38,7 +38,7 @@ public class GamePanel {
 		livesTimePanel.add(livesLabel);
 		livesTimePanel.add(timerLabel);
 		
-		JLabel roomPanel = new JLabel("Room " + Player.getCurrentLevel());	//Fill 2nd Panel
+		JLabel roomPanel = new JLabel("Room " + Player.getCurrentRoom());	//Fill 2nd Panel
 		JLabel questionLabel = new JLabel(Story.getQuestion());	
 		roomQuestionPanel.add(roomPanel);
 		roomQuestionPanel.add(questionLabel);
