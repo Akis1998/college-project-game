@@ -18,6 +18,8 @@ public class Story {
 	
 	public static void getLevelQuestions(int level) {
 		JSONParser parser = new JSONParser();
+		
+		
 		try {
 			Object obj = parser.parse(new FileReader("JSONS/questions.json"));
 	
