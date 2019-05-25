@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
@@ -13,7 +12,6 @@ import javax.swing.Timer;
 
 public class GameFunctions {
 	//Dialog boxes need to be implemented
-	
 	
 	
 	public static void showMessage(String info, JFrame aframe, int timeinms) {
@@ -42,7 +40,6 @@ public class GameFunctions {
 		dialog.setVisible(true);
 	}
 	
-	
 	public static int coinflip() {
 		return (int)(Math.random()*2); //returns integer in the range: [0,2)
 	}
@@ -53,7 +50,7 @@ public class GameFunctions {
 		Player.updateCurrentRoom();
 		Player.updateScore();
 		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,2200);
-		
+
 		if (coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			showEnemy(aframe,reducedTime);
@@ -102,6 +99,7 @@ public class GameFunctions {
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				Player.updateCurrentRoom();
+				aframe.dispose();
 				Main.openNewGamePanel();
 			}
 			else
@@ -124,7 +122,6 @@ public class GameFunctions {
         dialog.setBackground(Color.LIGHT_GRAY);
         dialog.setContentPane(optionPane);
         
-
         dialog.pack();
         
         dialog.setLocationRelativeTo(aframe);
@@ -141,7 +138,5 @@ public class GameFunctions {
 		//start timer to close JDialog as dialog modal we must start the timer before its visible
 		timer.start();
 		dialog.setVisible(true);
-		
-		
 	}
 }

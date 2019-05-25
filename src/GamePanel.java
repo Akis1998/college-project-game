@@ -35,7 +35,11 @@ public class GamePanel {
 		JPanel answersDoorsRBtnPanel = new JPanel(new GridLayout(3,3));	//6th Panel
 		
 		JLabel livesLabel = new JLabel("Lives: " + Player.getLives());	//Fill 1st Panel
-		JLabel timerLabel = new JLabel("Time Left: " /*+ Player.getTimeLeft()*/);
+		JLabel timerLabel = new JLabel();
+		if (Player.getCurrentRoom() == 1)	//Start the timer
+			Player.setFirstTimer(timerLabel, frame);
+		else
+			Player.setSecondPlusTimer(timerLabel);
 		JLabel scoreLabel = new JLabel("Score: " + Player.getScore());
 		livesTimeScorePanel.add(livesLabel);
 		livesTimeScorePanel.add(timerLabel);

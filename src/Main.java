@@ -1,5 +1,3 @@
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main {
 
@@ -8,7 +6,6 @@ public class Main {
 	}
 	
 	public static void openNewGamePanel() {
-		
 		Story.findQuestion(Player.getCurrentRoom());
 		new GamePanel();
 	}
