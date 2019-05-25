@@ -92,10 +92,9 @@ public class GamePanel {
 		restartSkipExitPanel.add(exitBtn);
 		restartSkipExitPanel.add(Box.createVerticalGlue());
 		
-		ArrayList<String> shuffledAnswers = new ArrayList<>();	//Fill 6th Panel
-		for (String an_answer: Story.getAnswers())
-			shuffledAnswers.add(an_answer);
+		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());	//Fill 6th Panel
 		Collections.shuffle(shuffledAnswers);	//shuffle the answers
+		
 		JLabel answer1Label = new JLabel(shuffledAnswers.get(0));
 		JLabel answer2Label = new JLabel(shuffledAnswers.get(1));
 		JLabel answer3Label = new JLabel(shuffledAnswers.get(2));
@@ -119,7 +118,6 @@ public class GamePanel {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
 					if (answer1Label.getText().equals(Story.getRightAnswer())) {	//correct answer
 						GameFunctions.rightAnswer(frame);
-						//Image playerIcon = new ImageIcon(this.getClass().getResource("/char2.jpg")).getImage();
 						
 					}
 					else {	//wrong answer
@@ -145,7 +143,7 @@ public class GamePanel {
 					}		
 				}
 				else {
-					GameFunctions.showMessage("Need to select an answer first!", frame);
+					JOptionPane.showMessageDialog(frame, "Need to select an answer first!", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		}

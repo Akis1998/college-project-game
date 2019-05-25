@@ -42,7 +42,7 @@ public class Story {
 		Random randomGenerator = new Random();
 		int random_int= randomGenerator.nextInt(NUMBEROFQUESTIONS);
 		getLevelQuestions(level);
-		System.out.println(level_question_set);
+		//System.out.println(level_question_set); //testing purposes
 		HashMap<String, ArrayList<String>> question_and_ans_struct = (HashMap) level_question_set.get(random_int);
 		
 		question = (String) question_and_ans_struct.keySet().toArray()[0];

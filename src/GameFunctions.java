@@ -16,7 +16,7 @@ public class GameFunctions {
 	
 	
 	
-	public static void showMessage(String info, JFrame aframe) {
+	public static void showMessage(String info, JFrame aframe, int timeinms) {
 		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 		
 		final JDialog dialog = new JDialog();
@@ -28,8 +28,8 @@ public class GameFunctions {
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
 		dialog.setLocationRelativeTo(aframe);
-		//create timer to dispose of dialog after 3 seconds
-		Timer timer = new Timer(3000, new AbstractAction() {
+		//create timer to dispose of dialog after x seconds
+		Timer timer = new Timer(timeinms, new AbstractAction() {
 
 		    public void actionPerformed(ActionEvent ae) {
 		        dialog.dispose();
@@ -44,10 +44,7 @@ public class GameFunctions {
 	
 	
 	public static int coinflip() {
-		//return (int)(Math.random()*1); //testing
-		int x= (int)(Math.random()*2); //[0,2)
-		System.out.println(x);
-		return x;
+		return (int)(Math.random()*2); //returns integer in the range: [0,2)
 	}
 	
 	public static void rightAnswer(JFrame aframe) {
@@ -55,13 +52,13 @@ public class GameFunctions {
 			Player.addALife();
 		Player.updateCurrentRoom();
 		Player.updateScore();
-		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe);
+		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,2200);
 		
 		if (coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			showEnemy(aframe,reducedTime);
 			if (Player.getRemainingTime()-reducedTime<=0) {
-				showMessage("GAME OVER!!!",aframe);
+				showMessage("GAME OVER!!!",aframe,2500);
 				System.exit(1);
 			}
 			else
@@ -76,17 +73,17 @@ public class GameFunctions {
 	public static void wrongAnswer(JFrame aframe) {
 		Player.removeALife();
 		if (Player.getLives() == 0) {
-			showMessage("GAME OVER!!!",aframe);
+			showMessage("GAME OVER!!!",aframe,2500);
 			System.exit(1);
 		}
 		Player.updateCurrentRoom();
-		showMessage("Wrong answer!\nLives left: "+Player.getLives(),aframe);
+		showMessage("Wrong answer!\nLives left: "+Player.getLives(),aframe,2200);
 		
 		if (coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			showEnemy(aframe,reducedTime);
 			if (Player.getRemainingTime()-reducedTime<=0) {
-				showMessage("GAME OVER!!!",aframe);
+				showMessage("GAME OVER!!!",aframe,2500);
 				System.exit(1);
 			}
 			else
@@ -101,24 +98,24 @@ public class GameFunctions {
 	public static void skipBtn(JFrame aframe) {
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
-				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!", aframe);
+				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!", aframe,3000);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				Player.updateCurrentRoom();
 				Main.openNewGamePanel();
 			}
 			else
-				showMessage("You don't have enough lives to skip the question!", aframe);
+				showMessage("You don't have enough lives to skip the question!", aframe,3000);
 		}
 		else
-			showMessage("You already used the skip option once!", aframe);
+			showMessage("You already used the skip option once!", aframe,3000);
 	}
 	
 	public static void showEnemy(JFrame aframe,int reducedTime) {
 		String message= "The enemy has cut "+reducedTime+" second(s) off of your time!";
 		
 		JOptionPane optionPane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-		optionPane.add(new JLabel(new ImageIcon("Images/enemy.jpg"),SwingConstants.CENTER));
+		optionPane.add(new JLabel(new ImageIcon("Images/enemy.jpg"),JLabel.LEADING));
 		
 		JDialog dialog = new JDialog();
 		dialog.setModal(true);
@@ -133,7 +130,7 @@ public class GameFunctions {
         dialog.setLocationRelativeTo(aframe);
         
 		//create timer to dispose of dialog after 4 seconds
-		Timer timer = new Timer(4000, new AbstractAction() {
+		Timer timer = new Timer(2700, new AbstractAction() {
 
 		    public void actionPerformed(ActionEvent ae) {
 		        dialog.dispose();

@@ -15,7 +15,7 @@ import javax.swing.Timer;
 
 public class Testing_Class {
 	
-	public static void get_shit() {
+	public static void testMethod() {
 		JFrame frame = new JFrame("The enemy is here!");
 		JPanel mainPanel = new JPanel(new BorderLayout());	//mainPanel
 		JLabel playerImage = new JLabel("");
