@@ -9,6 +9,7 @@ import java.util.Collections;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -118,9 +119,12 @@ public class GamePanel {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
 					if (answer1Label.getText().equals(Story.getRightAnswer())) {	//correct answer
 						GameFunctions.rightAnswer(frame);
+						//Image playerIcon = new ImageIcon(this.getClass().getResource("/char2.jpg")).getImage();
+						
 					}
 					else {	//wrong answer
 						GameFunctions.wrongAnswer(frame);
+						
 					}
 				}
 				else if (door2RBtn.isSelected()) {	//2nd Btn selected
@@ -141,7 +145,7 @@ public class GamePanel {
 					}		
 				}
 				else {
-					//No RBtn selected - Needs Implementation!
+					GameFunctions.showMessage("Need to select an answer first!", frame);
 				}
 			}
 		}

@@ -1,17 +1,15 @@
 
 public class Player {
 	
-	private static int id;
+	
 	private static int lives = 3;
 	private static int current_room = 1;
 	private static int score = 0;
 	private static double time;
 	private static String name;
 	private static boolean skipAvailable = true;
+	private static int timeLeft= 10;
 	
-	public Player() {
-		//this.id = (int) Math.floor((Math.random() * 200) + 1);
-	}
 	
 	public static int getScore() {
 		return score;
@@ -33,6 +31,14 @@ public class Player {
 	
 	public static void removeALife() {
 		lives -= 1;
+	}
+	
+	public static int getRemainingTime() {
+		return timeLeft;
+	}
+	
+	public static void reduceTime(int time) {
+		timeLeft-=time;
 	}
 	public static String printScore() {
 		return "Hey"+name+"\nYour score is"+score;
