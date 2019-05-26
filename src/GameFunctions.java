@@ -49,6 +49,7 @@ public class GameFunctions {
 			Player.addALife();
 		Player.updateCurrentRoom();
 		Player.updateScore();
+		Player.setTimeCounterStart();
 		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,2200);
 
 		if (coinflip()==1) {
@@ -73,10 +74,10 @@ public class GameFunctions {
 			showMessage("GAME OVER!!!",aframe,2500);
 			System.exit(1);
 		}
-		Player.updateCurrentRoom();
+		//Player.updateCurrentRoom();  Should it pass the room with wrong answer?
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),aframe,2200);
 		
-		if (coinflip()==1) {
+		if (coinflip()==1) {	//SRS states that Enemy should not KILL the player!
 			int reducedTime=Enemy.reduceTime();
 			showEnemy(aframe,reducedTime);
 			if (Player.getRemainingTime()-reducedTime<=0) {

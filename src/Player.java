@@ -76,12 +76,16 @@ public class Player {
 		return score;
 	}
 	
+	public static void setTimeCounterStart() {
+		timeCounterStart = time;
+	}
+	
 	public static void updateScore() {
 		timeCounterEnd = time;
 		int bonus = 20 - (timeCounterStart - timeCounterEnd);
 		if (bonus < 0)
 			bonus = 0;
-		System.out.print(bonus);
+		//System.out.println(bonus);
 		score = score + 1000 + (bonus * 100);
 	}
 	
